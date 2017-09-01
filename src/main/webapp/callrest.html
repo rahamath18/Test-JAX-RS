@@ -1,0 +1,63 @@
+<html>
+<body>
+</body>
+</html>
+
+
+<!DOCTYPE html>
+<html>
+	<head>
+	<meta charset="UTF-8">
+	<title>REST Callt for XML & JSON</title>
+	</head>
+	
+	<body>
+		
+		<h1>REST Call</h1>
+		
+		<p><h3>REST response content in XML format (by Jersey XML API)</h3></p>
+		<textarea id="getUsersInXML" rows="10" cols="100"></textarea> </br></br>
+		
+		<p><h3>REST response content in JSON format (by Jersey JSON API)</h3></p>
+		<textarea id="getUsersInJSON" rows="10" cols="100"></textarea>
+		
+		<p><h3>REST response content in PLAIN-TEXT format (by java.lang.Object.toString())</h3></p>
+		<textarea id="getUsersInTEXT" rows="10" cols="100"></textarea>
+		
+	</body>
+	
+	<script>
+	
+	var method = "GET";
+	var getUsersInXMLURL = "http://localhost:8080/Test-JAX-RS/rest/user/getUsersInXML";
+	var getUsersInJSONURL = "http://localhost:8080/Test-JAX-RS/rest/user/getUsersInJSON"
+	var getUsersInTEXTURL = "http://localhost:8080/Test-JAX-RS/rest/user/getUsersInTEXT"
+	
+	var flag = false;
+	
+	var contentType_xml = "application/xml";
+	var contentType_json = "application/json";
+	var contentType_txt_plain = "text/plain";
+	var contentType_txt_html = "text/html";
+	
+	var elem_1 = "getUsersInXML";
+	var elem_2 = "getUsersInJSON";
+	var elem_3 = "getUsersInTEXT";
+	
+	doLoadREST(method, getUsersInXMLURL, flag, contentType_xml, elem_1);
+	doLoadREST(method, getUsersInJSONURL, flag, contentType_json, elem_2);
+	doLoadREST(method, getUsersInTEXTURL, flag, contentType_txt_plain, elem_3);
+
+	function doLoadREST(method, url, flag, contentType, elem) {
+	    var xhttp = new XMLHttpRequest();
+	    xhttp.open(method, url, flag);
+	    xhttp.setRequestHeader("Content-type", contentType);
+	    xhttp.send();
+	    //var response = JSON.parse(xhttp.responseText);
+	    var usersInXML = xhttp.responseText;
+	    document.getElementById(elem).innerHTML = usersInXML;
+	}
+	
+	</script>
+
+</html>
